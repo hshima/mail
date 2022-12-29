@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import java.lang.management.ManagementFactory;
 import java.util.Properties;
 
 @Configuration
@@ -21,15 +22,17 @@ public class JavaMailConfig {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
-        mailSender.setUsername("shimada.henrique@gmail.com");
+        mailSender.setUsername(user);
         mailSender.setPassword(secret);
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.debug", "true");
-
+        boolean isDebug = ManagementFactory.getRuntimeMXBean().getInputArguments().stream().anyMatch(s -> s.contains("jdwp"));
+        if(isDebug) {
+            props.put("mail.debug", "true");
+        }
         return mailSender;
     }
 }

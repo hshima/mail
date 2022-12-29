@@ -20,7 +20,7 @@ public class Controller {
                     "shimada.henrique@gmail.com",
                     "teste de envio por aplicação",
                     "Sucesso!",
-                    "C:\\Users\\shima\\IdeaProjects\\demo1\\src\\main\\java\\com\\example\\demo\\controller\\20221018.pdf"
+                    "private/20221018.pdf"
             );
         }catch (Exception e){
             e.printStackTrace();
